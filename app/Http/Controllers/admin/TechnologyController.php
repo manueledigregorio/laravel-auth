@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Tecnology;
 
 class TechnologyController extends Controller
 {
@@ -14,7 +15,8 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        $technologies = Tecnology::orderBy('id')->paginate(10);
+        return view('admin.technologies.index', compact('technologies'));
     }
 
     /**
