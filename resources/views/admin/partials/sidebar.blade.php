@@ -1,7 +1,7 @@
 <aside class="bg-dark">
     <nav>
         <ul>
-            <li><a href="">Dashboard</a></li>
+            <li><a href="{{route('adminhome')}}">Dashboard</a></li>
             <li><a href="">Lista Post</a></li>
         </ul>
     </nav>

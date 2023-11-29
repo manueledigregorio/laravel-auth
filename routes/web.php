@@ -4,6 +4,10 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TechnologyController;
+use App\Http\Controllers\Admin\TypeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
+//Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,5 +36,8 @@ Route::middleware(['auth', 'verified'])
     ->name('admin')
     ->group(function(){
         Route::get('/', [DashboardController::class , 'index'])->name('home');
+        Route::resource('projects', ProjectController::class);
+        Route::resource('technologies', TechnologyController::class);
+        Route::resource('types', TypeController::class);
     });
 require __DIR__.'/auth.php';
