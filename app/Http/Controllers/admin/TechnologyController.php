@@ -46,9 +46,9 @@ class TechnologyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tecnology $technology)
     {
-        //
+
     }
 
     /**
@@ -80,8 +80,10 @@ class TechnologyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tecnology $technology)
     {
-        //
+        $technology->delete();
+
+        return redirect()->route('admin.technologies.index')->with('deleted', "La pasta $technology->name è stata eliminata correttamente");
     }
 }
