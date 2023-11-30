@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tecnology;
-
+use App\Http\Requests\TechonologyRequest;
 class TechnologyController extends Controller
 {
     /**
@@ -26,7 +26,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.technologies.create');
     }
 
     /**
@@ -35,9 +35,18 @@ class TechnologyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TechonologyRequest $request)
     {
-        //
+        $form_data= $request->all();
+
+         // avendo creato la proprità $fillable (coin tutti i campi), posso usare il metodo fill()
+        // lo slug, on essendo presente nel form lo devo in ogni caso creare
+        $new_technology = new Tecnology();
+        $form_data['slug'] = Tecnology::generateSlug($form_data['name']);
+        $new_technology->fill($form_data);
+        // lo salvo nel db
+        $new_technology->save();
+        return redirect()->route('admin.technologies.create',$new_technology->id);
     }
 
     /**
