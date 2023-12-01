@@ -42,6 +42,7 @@ class TechnologyController extends Controller
          // avendo creato la proprità $fillable (coin tutti i campi), posso usare il metodo fill()
         // lo slug, on essendo presente nel form lo devo in ogni caso creare
         $new_technology = new Tecnology();
+
         $form_data['slug'] = Tecnology::generateSlug($form_data['name']);
         $new_technology->fill($form_data);
         // lo salvo nel db
