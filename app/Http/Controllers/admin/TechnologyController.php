@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Functions\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tecnology;
@@ -43,7 +44,7 @@ class TechnologyController extends Controller
         // lo slug, on essendo presente nel form lo devo in ogni caso creare
         $new_technology = new Tecnology();
 
-        $form_data['slug'] = Tecnology::generateSlug($form_data['name']);
+        $form_data['slug'] = Helper::generateSlug($form_data['name'], Tecnology::class);
         $new_technology->fill($form_data);
         // lo salvo nel db
         $new_technology->save();
